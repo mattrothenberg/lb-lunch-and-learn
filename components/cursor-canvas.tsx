@@ -5,7 +5,7 @@ export const COLORS = ["#DC2626", "#D97706", "#059669", "#7C3AED", "#DB2777"];
 
 export function CursorCanvas() {
   const others = useOthers();
-  const [_, updateMyPresence] = useMyPresence();
+  const [presence, updateMyPresence] = useMyPresence();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,9 +63,11 @@ export function CursorCanvas() {
           });
         }}
       >
-        <div className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none opacity-100 group-hover:opacity-0 transition-opacity">
+        <div className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none">
           <p className="text-gray-400 text-3xl transform -rotate-6">
-            Move your mouse around this box!
+            {presence.cursor
+              ? `${presence.cursor.x}x${presence.cursor.y}`
+              : `Move your mouse around this box!`}
           </p>
         </div>
         {others.map(({ connectionId, presence }) => {
