@@ -51,7 +51,7 @@ export function ObjectExplorer() {
   );
 
   return (
-    <div className="lg:flex divide-y-2 lg:divide-y-0 lg:divide-x-2 divide-black">
+    <div className="lg:flex divide-y-2 lg:divide-y-0 lg:divide-x-2 divide-black border-2 border-black">
       <div className="aspect-[16/9] flex-1 z-10 relative min-w-0">
         <Canvas>
           <color attach="background" args={["black"]} />
