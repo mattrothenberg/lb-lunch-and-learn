@@ -1,4 +1,4 @@
-import { createClient, LiveObject } from "@liveblocks/client";
+import { createClient, LiveList, LiveObject } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 
 const client = createClient({
@@ -8,6 +8,7 @@ const client = createClient({
 export type Presence = {
   username?: string;
   focusedInput: string | null;
+  focusedMagnet: number | null;
   cursor: {
     x: number;
     y: number;
@@ -20,9 +21,26 @@ export type AsciiTorus = {
   color: string;
 };
 
-type Storage = {
-  asciiTorus: LiveObject<AsciiTorus>;
+export type Magnet = {
+  word: string;
+  x: number;
+  y: number;
 };
 
-export const { RoomProvider, useMyPresence, useOthers, useSelf, useObject } =
-  createRoomContext<Presence, Storage>(client);
+type Storage = {
+  asciiTorus: LiveObject<AsciiTorus>;
+  magnets: LiveList<LiveObject<Magnet>>;
+};
+
+export const {
+  RoomProvider,
+  useMyPresence,
+  useOthers,
+  useSelf,
+  useObject,
+  useCanUndo,
+  useCanRedo,
+  useHistory,
+  useRoom,
+  useList,
+} = createRoomContext<Presence, Storage>(client);

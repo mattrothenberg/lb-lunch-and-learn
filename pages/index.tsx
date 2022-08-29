@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { CursorCanvas } from "../components/cursor-canvas";
+import { HistoryCanvas } from "../components/history-canvas";
 import { ObjectExplorer } from "../components/object-explorer";
 
 const Home: NextPage = () => {
@@ -36,12 +37,28 @@ const Home: NextPage = () => {
             </p>
           </div>
           <div className="mt-8">
-            <div className="grid grid-cols-12 gap-8">
-              <div className="col-span-12 border-2 border-gray-900">
-                <ObjectExplorer />
-              </div>
-              <div className="col-span-6 border-2 border-gray-900"></div>
-              <div className="col-span-6 border-2 border-gray-900"></div>
+            <ObjectExplorer />
+          </div>
+        </div>
+      </section>
+      <div className="container">
+        <div aria-hidden className="zigzag" />
+      </div>
+      <section>
+        <div className="container">
+          <span className="uppercase tracking-wider font-bold text-xs bg-gray-800 text-offWhite rounded-full inline-flex items-center px-3 py-1">
+            Step 2, cont.
+          </span>
+          <div className="mt-4">
+            <h1 className="text-3xl font-semibold tracking-tight">History</h1>
+            <p className="mt-2 text-xl max-w-3xl text-gray-600">
+              Liveblocks provides a dedicated API for common "history"
+              operations like undo, redo.
+            </p>
+          </div>
+          <div className="mt-8">
+            <div className="aspect-video relative border-2 border-gray-900">
+              <HistoryCanvas />
             </div>
           </div>
         </div>

@@ -83,8 +83,15 @@ export function ObjectExplorer() {
               name="characters"
               disabled={!torus || Boolean(otherCharactersFocus)}
               value={torus?.get("characters") ?? ""}
-              onFocus={() => updatePresence({ focusedInput: "characters" })}
-              onBlur={() => updatePresence({ focusedInput: null })}
+              onFocus={() =>
+                updatePresence(
+                  { focusedInput: "characters" },
+                  { addToHistory: false }
+                )
+              }
+              onBlur={() =>
+                updatePresence({ focusedInput: null }, { addToHistory: false })
+              }
               onChange={(e) => torus?.update({ characters: e.target.value })}
               maxLength={12}
               className="w-full p-1 bg-transparent border-gray-900 border-2 focus:ring-black/20 focus:outline-none focus:ring focus:border-black disabled:opacity-50"
@@ -106,8 +113,15 @@ export function ObjectExplorer() {
               id="rotation"
               name="rotation"
               className="w-full disabled:opacity-50"
-              onFocus={() => updatePresence({ focusedInput: "rotation" })}
-              onBlur={() => updatePresence({ focusedInput: null })}
+              onFocus={() =>
+                updatePresence(
+                  { focusedInput: "rotation" },
+                  { addToHistory: false }
+                )
+              }
+              onBlur={() =>
+                updatePresence({ focusedInput: null }, { addToHistory: false })
+              }
               type="range"
               step={0.1}
               min={0.1}
@@ -137,8 +151,15 @@ export function ObjectExplorer() {
               disabled={!torus}
               value={torus?.get("color") ?? ""}
               onChange={(e) => torus?.update({ color: e.target.value })}
-              onFocus={() => updatePresence({ focusedInput: "color" })}
-              onBlur={() => updatePresence({ focusedInput: null })}
+              onFocus={() =>
+                updatePresence(
+                  { focusedInput: "color" },
+                  { addToHistory: false }
+                )
+              }
+              onBlur={() =>
+                updatePresence({ focusedInput: null }, { addToHistory: false })
+              }
               maxLength={12}
               className="w-full p-1 bg-transparent border-gray-900 border-2 focus:ring-black/20 focus:outline-none focus:ring focus:border-black disabled:opacity-50"
               type="color"
