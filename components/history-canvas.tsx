@@ -41,11 +41,17 @@ export function HistoryCanvas() {
       return;
     }
 
+    let xOffset = x.get();
+    let yOffset = y.get();
+
+    let adjustedX = bounds.width / 2 - xOffset;
+    let adjustedY = bounds.height / 2 - yOffset;
+
     magnets?.push(
       new LiveObject({
         word: newWord,
-        x: bounds.width / 2,
-        y: bounds.height / 2,
+        x: adjustedX,
+        y: adjustedY,
       })
     );
   }, [bounds]);
