@@ -37,7 +37,7 @@ export default function Cursor({ color, x, y, username }: CursorProps) {
       {username && (
         <div className="w-6 h-6 rounded-full bg-gray-50 flex-shrink-0 relative bottom-2">
           <img
-            className="w-6 h-6 rounded-full"
+            className="w-6 h-6 rounded-full border-2 border-black shadow"
             src={`https://github.com/${username}.png`}
             alt={username}
           />

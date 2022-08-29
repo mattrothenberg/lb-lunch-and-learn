@@ -1,42 +1,43 @@
+import { useState } from "react";
+import { useUpdateEffect } from "react-use";
+import { useDebounce } from "use-debounce";
+import { useMyPresence, useOthers } from "../liveblocks.config";
 import Cursor from "./cursor";
-import { useMyPresence, useOthers, useSelf } from "../liveblocks.config";
 
 export const COLORS = ["#DC2626", "#D97706", "#059669", "#7C3AED", "#DB2777"];
 
 export function CursorCanvas() {
   const others = useOthers();
+  const [username, setUsername] = useState("");
   const [presence, updateMyPresence] = useMyPresence();
+  const [debouncedUsername] = useDebounce(username, 1000);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let formEl = e.target as HTMLFormElement;
-    let formData = new FormData(formEl);
-    let username = formData.get("username") as string;
-
-    updateMyPresence({
-      username,
-    });
-  };
+  useUpdateEffect(() => {
+    updateMyPresence({ username: debouncedUsername });
+  }, [debouncedUsername]);
 
   return (
     <div>
       <div className="flex items-center justify-between">
-        <form onSubmit={handleSubmit}>
-          <div className="flex space-x-2">
-            <input
-              name="username"
-              className="p-1 bg-transparent border-gray-900 border-2 focus:ring-black/20 focus:outline-none focus:ring focus:border-black w-64"
-              placeholder="Enter your GitHub username"
-              type="text"
-            />
-            <button
-              className="bg-gray-900 text-offWhite px-4 font-semibold tracking-tight"
-              type="submit"
-            >
-              Save
-            </button>
-          </div>
-        </form>
+        <div className="relative w-72 inline-block">
+          <input
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="pl-2 py-1 pr-4 bg-transparent border-gray-900 border-2 focus:ring-black/20 focus:outline-none focus:ring focus:border-black w-full"
+            placeholder="Enter your GitHub username"
+            type="text"
+          />
+          {debouncedUsername && (
+            <div className="absolute right-2 top-0 bottom-0 inline-flex ml-auto items-center justify-center">
+              <img
+                alt={debouncedUsername}
+                className="w-6 h-6 rounded-full border-2 border-black"
+                src={`https://github.com/${debouncedUsername}.png`}
+              />
+            </div>
+          )}
+        </div>
         <div>
           <p className="text-sm font-semibold"># of Other Users</p>
           <p className="text-right text-lg font-mono">{others.count}</p>
