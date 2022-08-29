@@ -74,7 +74,7 @@ export function Magnet({
         style={{
           opacity: isBeingDragged ? 0.5 : 1,
         }}
-        className="select-none cursor-grab active:cursor-grabbing magnet bg-offWhite flex-shrink-0 inline-flex border-2 items-center justify-center h-[40px] text-xl border-gray-900 overflow-hidden transition-opacity px-2"
+        className="select-none cursor-grab active:cursor-grabbing magnet bg-offWhite flex-shrink-0 inline-flex border-2 items-center justify-center h-[40px] text-xl border-gray-900 overflow-hidden transition-opacity px-2 whitespace-pre"
       >
         {magnet.get("word")}
       </div>
