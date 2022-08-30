@@ -1,5 +1,9 @@
 import { BaseUserMeta, User } from "@liveblocks/client";
-import { OrbitControls } from "@react-three/drei";
+import {
+  OrbitControls,
+  OrthographicCamera,
+  PerspectiveCamera,
+} from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useRef } from "react";
@@ -58,8 +62,14 @@ export function ObjectExplorer() {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
           <Torusknot rotation={torus?.get("rotation")} />
-          <OrbitControls />
-
+          {/* @ts-ignore */}
+          <PerspectiveCamera
+            makeDefault
+            position={[2, 0, 1]}
+            zoom={0.25}
+            fov={45}
+          />
+          <OrbitControls enableZoom={false} />
           <AsciiRenderer
             characters={torus?.get("characters")}
             color={torus?.get("color")}
